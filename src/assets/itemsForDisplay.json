@@ -1,0 +1,76 @@
+ [{
+    "itemName": "parrot",
+    "price": "700",
+    "id": "1",
+    "imageSrc": "/littleBirdImage.jpg",
+    "moreInfo": "squeaky",
+    "tag": "bird"
+   
+  },
+  {
+    "itemName": "lion",
+    "price": "500",
+    "id": "2",
+    "imageSrc": "/loin.jpg",
+    "moreInfo": "very calm and cute, just make sure to always feed it ontime.",
+    "tag": "scary"
+  },
+  {
+    "itemName": "rabbit",
+    "price": "49.99",
+    "id": "3",
+    "imageSrc": "/rabbit.jpg",
+    "moreInfo": "needs lots of care",
+    "tag": "home pet"
+  },
+  {
+    "itemName": "snake",
+    "price": "50",
+    "id": "4",
+    "imageSrc": "/snake.jpg",
+    "moreInfo": "should be kept in cage",
+    "tag": "scary"
+  },
+  {
+    "itemName": "parrot1",
+    "price": "50",
+    "id": "5",
+    "imageSrc": "/littleBirdImage.jpg",
+    "moreInfo": "copy cat",
+    "tag": "bird"
+  },
+  {
+    "itemName": "bird",
+    "price": "50",
+    "id": "6",
+    "imageSrc": "/littleBirdImage.jpg",
+    "moreInfo": "will always find way back home",
+    "tag": "bird"
+
+  },
+  {
+    "itemName": "bird1",
+    "price": "50",
+    "id": "7",
+    "imageSrc": "/littleBirdImage.jpg",
+    "moreInfo": "don't leave near laundry",
+    "tag": "bird"
+
+  },
+  {
+    "itemName": "bird2",
+    "price": "50",
+    "id": "8",
+    "imageSrc": "/littleBirdImage.jpg",
+    "tag": "bird",
+    "moreInfo": "likes to eat"
+  },
+  {
+    "itemName": "bird3",
+    "price": "50",
+    "id": "9",
+    "imageSrc": "/littleBirdImage.jpg",
+    "moreInfo": "colourful",
+    "tag": "bird"
+
+  }]
