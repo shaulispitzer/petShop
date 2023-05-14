@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from "vue";
+import { computed, ref} from "vue";
 import TheEmptBasketQ from "./TheEmptyBasketQ.vue";
 import { useTheBasket } from "../stores/useTheBasket";
 const basketUsage = useTheBasket();
@@ -7,12 +7,7 @@ import { useChangeCurrency } from "../stores/useChangeCurrency";
 const changingCurrency = useChangeCurrency();
 import { useDisplayBasket } from "../stores/useDisplayBasket";
 const sOrH = useDisplayBasket();
-const props = defineProps({
-  basket: Array,
-  totalAmount: Number,
-  currentRate: Number,
-  currencySymbol: String,
-});
+
 let asked = ref(false);
 let emit = defineEmits(["changeAmount", "hideBasket"]);
 let sortBasket = computed(() => {
@@ -25,6 +20,7 @@ let sortBasket = computed(() => {
 
 function close() {
   asked.value = false;
+  console.log('really closed');
 }
 </script>
 
@@ -40,10 +36,8 @@ function close() {
         <TheEmptBasketQ
           v-if="asked"
           @close="close"
-          @empty="asked = false"
         />
       </Transition>
-      <!-- <ul @click="changeAmount" class="content"> -->
       <TransitionGroup name="fade" tag="ul" class="content">
         <li
           v-for="items in sortBasket"

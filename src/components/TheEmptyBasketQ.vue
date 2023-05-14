@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useTheBasket } from "../stores/useTheBasket";
 const basketUsage = useTheBasket();
 let created5msAgo = ref(false);
@@ -20,18 +20,19 @@ function keydown(e){
   }}
 onMounted(() => {
   setTimeout((created5msAgo.value = true), 10);
-  document.addEventListener('keydown', keydown)
+  console.log('mounted');
+  window.addEventListener('keydown', keydown)
   });
-onBeforeUnmount(()=>{
-  document.removeEventListener('keydown', keydown)
-})  
+ onUnmounted(()=>{
+  window.removeEventListener('keydown', keydown)
+ })
   
   
 </script>
 <template>
   <div class="questionPage fixed inset-0 h-full w-full grid items-center justify-center bg-indigo-500/50 z-10 " @click="closeFromOuter">
     <Transition name="innerTransition">
-      <div class="inner bg-orange-100 w-[60vw] h-[50vh]" v-if="created5msAgo">
+      <div class="inner bg-orange-100 w-[55vw] h-[45vh] p-5" v-if="created5msAgo">
         <span @click="$emit('close')" class="close">&#10006;</span>
         <h1>Are you sure you want to empty the basket?</h1>
         <button @click="empty">confirm and empty</button>
