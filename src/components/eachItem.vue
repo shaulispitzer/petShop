@@ -40,7 +40,7 @@ let amountInCom = computed(() => {
   <div class="itemCard" :class="{ thereIsIn: amountInCom }">
     <!-- <h1>{{ amountIn }}</h1> -->
     <h1 class="itemName" @click="openDetails">{{ items.itemName }} {{ amountInCom }}</h1>
-    <img class="image" :src="isThereAnImage" @click="openDetails" />
+    <img class="image" :src="props.items.imageSrc ? '/images' + props.items.imageSrc : '/images/noImageAvailable.png'" @click="openDetails" />
     <p>Lorem ipsum dolor sit amet consectetur adipisi</p>
     <p class="price font-bold">{{ changingCurrency.symbol }}{{ (items.price / +changingCurrency.currentRate).toFixed(2) }}</p>
 

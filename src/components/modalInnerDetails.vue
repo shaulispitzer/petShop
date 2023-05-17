@@ -18,10 +18,10 @@ function closeModal(e) {
     <div class="modalInner">
       <p class="text-center font-bold uppercase text-xl">{{ item.itemName }}</p>
       <div class="flex justify-center">
-      <img :src="'/images' + props.item.imageSrc" class="center"/>
+      <img :src="props.item.imageSrc ? '/images' + props.item.imageSrc : '/images/noImageAvailable.png'" class="center"/>
     </div>
       <p>{{ item.moreInfo }}</p>
-      <p class="price">
+      <p class="w-full text-center">
         <span>{{ changingCurrency.symbol }}</span
         >{{(item.price / +changingCurrency.currentRate).toFixed(2) }}
       </p>
@@ -53,8 +53,5 @@ function closeModal(e) {
   align-items: center;
   padding: 9px;
 }
-.price {
-  width: 100%;
-  text-align: center;
-}
+
 </style>
