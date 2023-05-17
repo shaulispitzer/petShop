@@ -71,8 +71,8 @@ function close() {
       <!-- </ul> -->
     </div>
     <div class="basketButtons">
-      <button class="emptyBasket" @click="asked = true">empty basket</button
-      ><button class="hideBasket" @click="sOrH.toggleBasket">hide basket</button>
+      <button class="emptyBasket" @click="asked = true">empty basket</button>
+      <button class="hideBasket" @click="sOrH.toggleBasket">hide basket</button>
     </div>
   </div>
 </template>
