@@ -17,6 +17,13 @@ let sortBasket = computed(() => {
     return textA < textB ? -1 : textA > textB ? 1 : 0;
   });
 });
+const isThereAnImage = computed(() => {
+  if (items.imageSrc) {
+    return "/images" + items.imageSrc;
+  } else {
+    return "/images/noImageAvailable.png";
+  }
+});
 
 function close() {
   asked.value = false;
@@ -44,8 +51,9 @@ function close() {
           :key="items.id"
           class="bottomBorder py-1 flex justify-evenly"
         >
-          <span class="itemName w-20 h-5 truncate"> {{ items.itemName }}</span
-          ><button
+      <img :src="items.imageSrc ? '/images' + items.imageSrc : '/images/noImageAvailable.png'" class="h-5 w-6"/>
+          <span class="itemName w-20 h-5 truncate text-center"> {{ items.itemName }}</span>
+          <button
             @click="basketUsage.minusOne"
             :value="basketUsage.newbasket.indexOf(items)"
           >
