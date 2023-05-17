@@ -29,19 +29,21 @@ function addAnother(e) {
   }
 }
 </script>
-<template>
-  <transition name="basketTransition">
+<template><div class="flex">
+  
+  <Transition name="basketTransition">
     <TheBasket
       v-if="sOrH.isDisplayed"
       @change-amount="addAnother"
      
-  /></transition>
-  <div class="griddingItems">
+  /></Transition>
+  <div class="griddingItems grow">
     <EachItem
       v-for="items in filteredItems"
       :key="items.itemName"
       :items="items"
     />
+  </div>
   </div>
 </template>
 <style scoped>
@@ -51,9 +53,10 @@ function addAnother(e) {
   grid-gap: 2px;
   align-content: space-between;
   align-items: center;
+  transition: width 2s ease-in; 
 }
 .basketTransition-enter-from {
-  transform: translateY(-90vh);
+  transform: translateX(-90vh);
   opacity: 0.2;
 }
 .basketTransition-leave-active,
@@ -62,7 +65,7 @@ function addAnother(e) {
   transition: 0.4s;
 }
 .basketTransition-leave-to {
-  transform: translateY(90vh);
+  transform: translateX(-90vh);
   opacity: 0.2;
 }
 </style>
