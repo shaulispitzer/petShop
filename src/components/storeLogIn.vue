@@ -29,8 +29,8 @@ function close(e) {
 </script>
 
 <template>
-  <div class="outerDiv" @click="close">
-    <div class="innerDiv">
+  <div class="outerDiv grid fixed z-10 h-screen w-screen items-center justify-center inset-0 bg-amber-300/70" @click="close">
+    <div class="innerDiv relative h-[80vh] w-[50vw]">
       <div class="tabContainer">
         <div class="tabButtons">
           <button
@@ -108,27 +108,11 @@ function close(e) {
   position: absolute;
 }
 
-.outerDiv {
-  background-color: rgba(217, 255, 0, 0.493);
-  display: grid;
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  inset: 0;
-  align-items: center;
-  justify-content: center;
-  /* z-index: 2; */
-}
-@media screen and (max-width: 961px) {
-  .outerDiv {
-    z-index: 2;
-  }
-}
+
+
 
 .innerDiv {
-  position: relative;
-  height: 80vh;
-  width: 50vw;
+  
   background-color: #ebecf0;
   padding: 2vh;
  
