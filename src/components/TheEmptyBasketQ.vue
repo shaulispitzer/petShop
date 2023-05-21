@@ -30,7 +30,7 @@ onMounted(() => {
   
 </script>
 <template>
-  <div class="questionPage fixed inset-0 h-full w-full grid items-center justify-center bg-indigo-500/50 z-10 " @click="closeFromOuter">
+  <div class="questionPage fixed inset-0 h-full w-full grid items-center justify-center bg-indigo-500/50 z-40 " @click="closeFromOuter">
     <Transition name="innerTransition">
       <div class="inner bg-orange-100 w-[55vw] h-[45vh] p-5" v-if="created5msAgo">
         <span @click="$emit('close')" class="close">&#10006;</span>

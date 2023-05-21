@@ -14,7 +14,7 @@ function closeModal(e) {
 }
 </script>
 <template>
-  <div class="modalOuter" @click="closeModal">
+  <div class="modalOuter z-20" @click="closeModal">
     <div class="modalInner">
       <p class="text-center font-bold uppercase text-xl">{{ item.itemName }}</p>
       <div class="flex justify-center">

@@ -39,12 +39,13 @@ function close() {
       Total: {{ changingCurrency.symbol }} {{ (basketUsage.totalPrice / +changingCurrency.currentRate).toFixed(2) }}
     </h3>
     <div>
+      <Teleport to="body">
       <Transition name="emptyTransition">
         <TheEmptBasketQ
           v-if="asked"
           @close="close"
         />
-      </Transition>
+      </Transition></Teleport>
       <TransitionGroup name="fade" tag="ul" class="content">
         <li
           v-for="items in sortBasket"
