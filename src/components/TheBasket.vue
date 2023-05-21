@@ -54,15 +54,13 @@ function close() {
       <img :src="items.imageSrc ? '/images' + items.imageSrc : '/images/noImageAvailable.png'" class="h-5 w-6"/>
           <span class="itemName w-20 h-5 truncate text-center"> {{ items.itemName }}</span>
           <button
-            @click="basketUsage.minusOne"
-            :value="basketUsage.newbasket.indexOf(items)"
+            @click="basketUsage.minusOne(items)"
           >
             -
           </button>
           <span class="itemQuantity px-2 w-3.5 flex justify-center">{{ items.quantity }}</span
           ><button
-            @click="basketUsage.plusOne"
-            :value="basketUsage.newbasket.indexOf(items)"
+            @click="basketUsage.plusOne(items)"
           >
             +
           </button>

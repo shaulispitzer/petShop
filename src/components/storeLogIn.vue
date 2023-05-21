@@ -84,7 +84,7 @@ function close(e) {
           <h2>remove an item</h2>
           <TransitionGroup class="p-0" name="fade" tag="ul" >
             <li class="list-none flex justify-start w-48 pl-1" v-for="(item, index) in itemsDisplay.allItems" :key="item.id" :class="index % 2 === 1 ? 'bg-slate-300' : ''"><span class="w-20 pl-2" >{{ item.itemName }}</span>
-            <button @click="itemsDisplay.removeItem" :value="itemsDisplay.allItems.indexOf(item)">x</button></li>
+            <button @click="itemsDisplay.removeItem(item)">x</button></li>
           </TransitionGroup>
         </div>
       </div>

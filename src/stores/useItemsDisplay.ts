@@ -9,7 +9,7 @@ export let useItemsDisplay = defineStore('allItems', () =>{
         allItems.push(newItem)
     }
     function removeItem(e){
-        allItems.splice(e.target.value,1)
+        allItems.splice(allItems.indexOf(e),1)
     }
     let tagsOnly = reactive(allItems.map((a)=>a.tag))
     

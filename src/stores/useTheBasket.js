@@ -23,18 +23,16 @@ else {
         function addFromLS(a) {
           newbasket.push(...a)
         }
-        function minusOne(){
-
-        }
+        
         function plusOne(e) {
-    newbasket[parseInt(e.target.value)].quantity++;
+    newbasket[parseInt(newbasket.indexOf(e))].quantity++;
 
         }
         function minusOne(e) {
-          // console.log(e.target.value);
-    if(newbasket[parseInt(e.target.value)].quantity === 1){
-      newbasket.splice(e.target.value,1)}
-      else{newbasket[parseInt(e.target.value)].quantity--}
+          const index = newbasket.indexOf(e);
+    if(newbasket[parseInt(index)].quantity === 1){
+      newbasket.splice(index,1)}
+      else{newbasket[parseInt(index)].quantity--}
     };
 
         
