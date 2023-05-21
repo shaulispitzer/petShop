@@ -49,7 +49,7 @@ const props = defineProps({
 let tags = computed(() => ["select catagoery:", "all", ...new Set(itemsDisplay.tagsOnly)]);
 </script>
 <template>
-  <div class="top">
+  <div class="top z-10">
     <nav class="buttons" :class="{responsive: !openTopNav, buttonsshrink: !scrolled}">
       <img src="/images/petShopLogoNew.jpg" class="w-24 h-24 duration-300" :class="{smaller: scrolled}"/>
       <button class="allButtons regular rightButton" @click="sOrH.toggleBasket">

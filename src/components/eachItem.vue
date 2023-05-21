@@ -2,6 +2,7 @@
 import { computed, watch, ref, onMounted } from "vue";
 import AddingTocartButtons from "./addingTocartButtons.vue";
 import ModalInnerDetails from "./modalInnerDetails.vue";
+import ShowInBasket from "./showInBasket.vue";
 import { useTheBasket } from "../stores/useTheBasket";
 const basketUsage = useTheBasket();
 import { useChangeCurrency } from "../stores/useChangeCurrency";
@@ -11,16 +12,10 @@ const props = defineProps({
 });
 const emit = defineEmits(["addFromMoreInfo"]);
 const showInBig = ref(false);
+const priceForItem = ref(0);
 
-const isThereAnImage = computed(() => {
-  if (props.items.imageSrc) {
-    return "/images" + props.items.imageSrc;
-  } else {
-    return "/images/noImageAvailable.png";
-  }
-});
 
-function openDetails(e) {
+function openDetails() {
   showInBig.value = true;
 }
 
@@ -29,6 +24,7 @@ let amountInCom = computed(() => {
     const index = basketUsage.newbasket.findIndex(
       (x) => x.itemName === props.items.itemName
     );
+    priceForItem.value = changingCurrency.symbol + ((basketUsage.newbasket[index].quantity * basketUsage.newbasket[index].price) / +changingCurrency.currentRate).toFixed(2)
     return basketUsage.newbasket[index].quantity;
   } else {
     return 0;
@@ -37,9 +33,9 @@ let amountInCom = computed(() => {
 // console.log(items.itemName);
 </script>
 <template>
-  <div class="itemCard" :class="{ thereIsIn: amountInCom }">
-    <!-- <h1>{{ amountIn }}</h1> -->
-    <h1 class="itemName" @click="openDetails">{{ items.itemName }} {{ amountInCom }}</h1>
+  <div class="itemCard relative " :class="{ thereIsIn: amountInCom }">
+    <ShowInBasket v-if="amountInCom" class="absolute left-0 top-14" :amount="amountInCom" :totalPrice="priceForItem"/>
+    <h1 class="itemName" @click="openDetails">{{ items.itemName }}</h1>
     <img class="image" :src="props.items.imageSrc ? '/images' + props.items.imageSrc : '/images/noImageAvailable.png'" @click="openDetails" />
     <p>Lorem ipsum dolor sit amet consectetur adipisi</p>
     <p class="price font-bold">{{ changingCurrency.symbol }}{{ (items.price / +changingCurrency.currentRate).toFixed(2) }}</p>
