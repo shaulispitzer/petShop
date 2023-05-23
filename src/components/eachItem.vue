@@ -33,7 +33,7 @@ let amountInCom = computed(() => {
 // console.log(items.itemName);
 </script>
 <template>
-  <div class="itemCard relative " :class="{ thereIsIn: amountInCom }">
+  <div class="itemCard relative" :class="{ thereIsIn: amountInCom }">
     <ShowInBasket v-if="amountInCom" class="absolute left-0 top-14" :amount="amountInCom" :totalPrice="priceForItem"/>
     <h1 class="itemName" @click="openDetails">{{ items.itemName }}</h1>
     <img class="image" :src="props.items.imageSrc ? '/images' + props.items.imageSrc : '/images/noImageAvailable.png'" @click="openDetails" />
@@ -64,7 +64,13 @@ let amountInCom = computed(() => {
   border-radius: 2vh;
   max-width: 250px;
   overflow: hidden;
+  transition: all .3s;
   /* height: 21rem; */
+}
+.itemCard:hover{
+  transform: scale(1.03);
+  z-index: 2;
+  background-color: white;
 }
 
 .itemName:hover {
