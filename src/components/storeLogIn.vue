@@ -29,7 +29,7 @@ function close(e) {
 </script>
 
 <template>
-  <div class="outerDiv grid fixed z-10 h-screen w-screen items-center justify-center inset-0 bg-amber-300/70" @click="close">
+  <div class="outerDiv grid fixed z-10 h-screen w-screen items-center justify-center inset-0 bg-amber-300/40 [b]" @click="close">
     <div class="innerDiv relative h-[80vh] w-[50vw]">
       <div class="tabContainer">
         <div class="tabButtons">
@@ -108,7 +108,9 @@ function close(e) {
   position: absolute;
 }
 
-
+.outerDiv{
+  backdrop-filter: blur(4px);
+}
 
 
 .innerDiv {
