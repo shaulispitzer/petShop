@@ -22,7 +22,7 @@ const priceForItem = computed(() => {
     (x) => x.itemName === props.items.itemName
   );
 
-  return item.quantity * item.price;
+  return item && item.quantity * item.price;
 });
 
 const amountInCom = computed(() => {
@@ -30,7 +30,7 @@ const amountInCom = computed(() => {
     (x) => x.itemName === props.items.itemName
   );
 
-  return item ? item.quantity : false;
+  return item && item.quantity;
 });
 
 // console.log(items.itemName);
