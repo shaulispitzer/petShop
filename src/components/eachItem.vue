@@ -3,42 +3,62 @@ import { computed, watch, ref, onMounted } from "vue";
 import AddingTocartButtons from "./addingTocartButtons.vue";
 import ModalInnerDetails from "./modalInnerDetails.vue";
 import ShowInBasket from "./showInBasket.vue";
+import Price from "./Price.vue";
 import { useTheBasket } from "../stores/useTheBasket";
 const basketUsage = useTheBasket();
-import { useChangeCurrency } from "../stores/useChangeCurrency";
-const changingCurrency = useChangeCurrency();
+
 const props = defineProps({
   items: Object,
 });
 const emit = defineEmits(["addFromMoreInfo"]);
 const showInBig = ref(false);
-const priceForItem = ref(0);
-
 
 function openDetails() {
   showInBig.value = true;
 }
 
-let amountInCom = computed(() => {
-  if (basketUsage.newbasket.some((e) => e.itemName === props.items.itemName)) {
-    const index = basketUsage.newbasket.findIndex(
-      (x) => x.itemName === props.items.itemName
-    );
-    priceForItem.value = changingCurrency.symbol + ((basketUsage.newbasket[index].quantity * basketUsage.newbasket[index].price) / +changingCurrency.currentRate).toFixed(2)
-    return basketUsage.newbasket[index].quantity;
-  } else {
-    return 0;
-  }
+const priceForItem = computed(() => {
+  const item = basketUsage.newbasket.find(
+    (x) => x.itemName === props.items.itemName
+  );
+
+  return item.quantity * item.price;
 });
+
+const amountInCom = computed(() => {
+  const item = basketUsage.newbasket.find(
+    (x) => x.itemName === props.items.itemName
+  );
+
+  return item ? item.quantity : false;
+});
+
 // console.log(items.itemName);
 </script>
 <template>
   <div class="itemCard relative" :class="{ thereIsIn: amountInCom }">
-    <ShowInBasket v-if="amountInCom" class="absolute left-0 top-14" :amount="amountInCom" :totalPrice="priceForItem"/>
+    <ShowInBasket
+      v-if="amountInCom"
+      class="absolute left-0 top-14"
+      :amount="amountInCom"
+      :price="priceForItem"
+    />
+
     <h1 class="itemName" @click="openDetails">{{ items.itemName }}</h1>
-    <img class="image" :src="props.items.imageSrc ? '/images' + props.items.imageSrc : '/images/noImageAvailable.png'" @click="openDetails" />
+    <img
+      class="image"
+      :src="
+        props.items.imageSrc
+          ? '/images' + props.items.imageSrc
+          : '/images/noImageAvailable.png'
+      "
+      @click="openDetails"
+    />
     <p>Lorem ipsum dolor sit amet consectetur adipisi</p>
-    <p class="price font-bold">{{ changingCurrency.symbol }}{{ (items.price / +changingCurrency.currentRate).toFixed(2) }}</p>
+    <p class="price font-bold">
+      <!-- {{ changingCurrency.symbol }}{{ (items.price / +changingCurrency.currentRate).toFixed(2) }} -->
+      <Price :price="parseInt(items.price)" />
+    </p>
 
     <AddingTocartButtons :items1="items" />
   </div>
@@ -64,10 +84,10 @@ let amountInCom = computed(() => {
   border-radius: 2vh;
   max-width: 250px;
   overflow: hidden;
-  transition: all .3s;
+  transition: all 0.3s;
   /* height: 21rem; */
 }
-.itemCard:hover{
+.itemCard:hover {
   transform: scale(1.03);
   z-index: 2;
   background-color: white;

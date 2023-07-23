@@ -1,11 +1,10 @@
 <script setup>
-import { computed, ref} from "vue";
+import { computed, ref } from "vue";
 import TheEmptBasketQ from "./TheEmptyBasketQ.vue";
 import { useTheBasket } from "../stores/useTheBasket";
 const basketUsage = useTheBasket();
-import { useChangeCurrency } from "../stores/useChangeCurrency";
-const changingCurrency = useChangeCurrency();
 import { useDisplayBasket } from "../stores/useDisplayBasket";
+import Price from "./Price.vue";
 const sOrH = useDisplayBasket();
 
 let asked = ref(false);
@@ -27,44 +26,46 @@ const isThereAnImage = computed(() => {
 
 function close() {
   asked.value = false;
-  console.log('really closed');
+  console.log("really closed");
 }
 </script>
 
 <template>
   <div class="basketDesign">
-    <p>{{ basketUsage.newbasket.length ? basketUsage.amountOfItems : "empty" }}</p>
+    <p>
+      {{ basketUsage.newbasket.length ? basketUsage.amountOfItems : "empty" }}
+    </p>
     <p class="text-3xl text-amber-600">BASKET</p>
     <h3>
-      Total: {{ changingCurrency.symbol }} {{ (basketUsage.totalPrice / +changingCurrency.currentRate).toFixed(2) }}
+      <Price :price="basketUsage.totalPrice" />
     </h3>
     <div>
       <Teleport to="body">
-      <Transition name="emptyTransition">
-        <TheEmptBasketQ
-          v-if="asked"
-          @close="close"
-        />
-      </Transition></Teleport>
+        <Transition name="emptyTransition">
+          <TheEmptBasketQ v-if="asked" @close="close" /> </Transition
+      ></Teleport>
       <TransitionGroup name="fade" tag="ul" class="content">
         <li
           v-for="items in sortBasket"
           :key="items.id"
           class="bottomBorder py-1 flex justify-evenly"
         >
-      <img :src="items.imageSrc ? '/images' + items.imageSrc : '/images/noImageAvailable.png'" class="h-5 w-6"/>
-          <span class="itemName w-20 h-5 truncate text-center"> {{ items.itemName }}</span>
-          <button
-            @click="basketUsage.minusOne(items)"
+          <img
+            :src="
+              items.imageSrc
+                ? '/images' + items.imageSrc
+                : '/images/noImageAvailable.png'
+            "
+            class="h-5 w-6"
+          />
+          <span class="itemName w-20 h-5 truncate text-center">
+            {{ items.itemName }}</span
           >
-            -
-          </button>
-          <span class="itemQuantity px-2 w-3.5 flex justify-center">{{ items.quantity }}</span
-          ><button
-            @click="basketUsage.plusOne(items)"
-          >
-            +
-          </button>
+          <button @click="basketUsage.minusOne(items)">-</button>
+          <span class="itemQuantity px-2 w-3.5 flex justify-center">{{
+            items.quantity
+          }}</span
+          ><button @click="basketUsage.plusOne(items)">+</button>
         </li></TransitionGroup
       >
       <!-- </ul> -->

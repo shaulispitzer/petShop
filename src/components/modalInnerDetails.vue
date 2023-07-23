@@ -1,9 +1,8 @@
 <script setup>
 import { useTheBasket } from "../stores/useTheBasket";
 const basketUsage = useTheBasket();
-import { useChangeCurrency } from "../stores/useChangeCurrency";
-const changingCurrency = useChangeCurrency();
 import { useDisplayBasket } from "../stores/useDisplayBasket";
+import Price from "./Price.vue";
 const sOrH = useDisplayBasket();
 const props = defineProps({ item: Object });
 const emit = defineEmits(["closeModal"]);
@@ -18,18 +17,29 @@ function closeModal(e) {
     <div class="modalInner">
       <p class="text-center font-bold uppercase text-xl">{{ item.itemName }}</p>
       <div class="flex justify-center">
-      <img :src="props.item.imageSrc ? '/images' + props.item.imageSrc : '/images/noImageAvailable.png'" class="center"/>
-    </div>
+        <img
+          :src="
+            props.item.imageSrc
+              ? '/images' + props.item.imageSrc
+              : '/images/noImageAvailable.png'
+          "
+          class="center"
+        />
+      </div>
       <p>{{ item.moreInfo }}</p>
       <p class="w-full text-center">
-        <span>{{ changingCurrency.symbol }}</span
-        >{{(item.price / +changingCurrency.currentRate).toFixed(2) }}
+        <Price :price="+item.price" />
       </p>
       <div class="flex justify-center">
-      <button @click="basketUsage.additem(props.item)" class="mr-3 translate-y-full duration-150">add to cart</button>
-      <button @click="sOrH.toggleBasket">{{ sOrH.isShown}} basket</button>
+        <button
+          @click="basketUsage.additem(props.item)"
+          class="mr-3 translate-y-full duration-150"
+        >
+          add to cart
+        </button>
+        <button @click="sOrH.toggleBasket">{{ sOrH.isShown }} basket</button>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 <style scoped>
@@ -53,5 +63,4 @@ function closeModal(e) {
   align-items: center;
   padding: 9px;
 }
-
 </style>
